@@ -16,7 +16,7 @@ namespace IMS_Project.Controllers
 
         public ActionResult Index()
         {
-            return View(db.curso.ToList());
+            return View(db.grupo.ToList());
         }
 
         public ActionResult Create()
@@ -26,20 +26,20 @@ namespace IMS_Project.Controllers
         }
         public void GetViewBagData()
         {
-            ViewBag.SupplierID = new SelectList(db.carrera, "Carrera", "Carrera");
-            
-
+            ViewBag.id_profesor = new SelectList(db.profesor, "id", "profesor");
+            ViewBag.id_estudiante = new SelectList(db.estudiante, "id", "estudiante");
+            ViewBag.id_curso = new SelectList(db.curso, "id", "curso");
         }
 
         [HttpPost]
-        public ActionResult Create(curso prod)
+        public ActionResult Create(grupo prod)
         {
             if (ModelState.IsValid)
             {
                 
-                db.curso.Add(prod);
+                db.grupo.Add(prod);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Grupo");
             }
             GetViewBagData();
             return View();
@@ -50,7 +50,7 @@ namespace IMS_Project.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            curso product = db.curso.Single(x => x.id == id);
+            grupo product = db.grupo.Single(x => x.id == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -61,13 +61,13 @@ namespace IMS_Project.Controllers
 
         //Post Edit
         [HttpPost]
-        public ActionResult Edit(curso prod)
+        public ActionResult Edit(grupo prod)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(prod).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Grupo");
             }
             GetViewBagData();
             return View(prod);
@@ -76,7 +76,7 @@ namespace IMS_Project.Controllers
         //Get Details
         public ActionResult Details(int id)
         {
-            curso  product = db.curso.Find(id);
+            grupo product = db.grupo.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -87,7 +87,7 @@ namespace IMS_Project.Controllers
         //Get Delete
         public ActionResult Delete(int id)
         {
-            curso product = db.curso.Find(id);
+            grupo product = db.grupo.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -101,8 +101,8 @@ namespace IMS_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            curso product = db.curso.Find(id);
-            db.curso.Remove(product);
+            grupo product = db.grupo.Find(id);
+            db.grupo.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
