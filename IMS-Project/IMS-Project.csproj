@@ -349,6 +349,10 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Grupo\Create.cshtml" />
+    <Content Include="Views\Grupo\Delete.cshtml" />
+    <Content Include="Views\Grupo\Edit.cshtml" />
+    <Content Include="Views\Grupo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
