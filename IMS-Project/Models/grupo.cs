@@ -14,22 +14,18 @@ namespace IMS_Project.Models
     
     public partial class grupo
     {
-        public grupo()
-        {
-            this.detalle_eng = new HashSet<detalle_eng>();
-            this.profesor = new HashSet<profesor>();
-        }
-    
         public string horario { get; set; }
         public int id { get; set; }
         public Nullable<System.DateTime> fecha_inicio { get; set; }
         public Nullable<System.DateTime> fecha_fin { get; set; }
         public Nullable<int> id_aula { get; set; }
         public Nullable<int> id_curso { get; set; }
+        public Nullable<int> id_profesor { get; set; }
+        public Nullable<int> id_estudiante { get; set; }
     
         public virtual aula aula { get; set; }
         public virtual curso curso { get; set; }
-        public virtual ICollection<detalle_eng> detalle_eng { get; set; }
-        public virtual ICollection<profesor> profesor { get; set; }
+        public virtual estudiante estudiante { get; set; }
+        public virtual profesor profesor { get; set; }
     }
 }

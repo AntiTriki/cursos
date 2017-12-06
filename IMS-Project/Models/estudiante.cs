@@ -16,8 +16,8 @@ namespace IMS_Project.Models
     {
         public estudiante()
         {
-            this.detalle_eng = new HashSet<detalle_eng>();
             this.inscripcion = new HashSet<inscripcion>();
+            this.grupo = new HashSet<grupo>();
         }
     
         public int id { get; set; }
@@ -25,7 +25,7 @@ namespace IMS_Project.Models
         public string apellido { get; set; }
         public string ci { get; set; }
     
-        public virtual ICollection<detalle_eng> detalle_eng { get; set; }
         public virtual ICollection<inscripcion> inscripcion { get; set; }
+        public virtual ICollection<grupo> grupo { get; set; }
     }
 }

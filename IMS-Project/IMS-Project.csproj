@@ -129,6 +129,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\admin_LoginController.cs" />
     <Compile Include="Controllers\Image.cs" />
+    <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -158,9 +159,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>cursos.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\detalle_eng.cs">
-      <DependentUpon>cursos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\estudiante.cs">
       <DependentUpon>cursos.tt</DependentUpon>

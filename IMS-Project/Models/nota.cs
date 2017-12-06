@@ -14,14 +14,7 @@ namespace IMS_Project.Models
     
     public partial class nota
     {
-        public nota()
-        {
-            this.detalle_eng = new HashSet<detalle_eng>();
-        }
-    
         public int id { get; set; }
         public Nullable<decimal> puntaje { get; set; }
-    
-        public virtual ICollection<detalle_eng> detalle_eng { get; set; }
     }
 }

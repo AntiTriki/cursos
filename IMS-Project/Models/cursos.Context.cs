@@ -35,8 +35,7 @@ namespace IMS_Project.Models
         public DbSet<nota> nota { get; set; }
         public DbSet<pago> pago { get; set; }
         public DbSet<profesor> profesor { get; set; }
-        public DbSet<tipocarrera> tipocarrera { get; set; }
-        public DbSet<detalle_eng> detalle_eng { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<tipocarrera> tipocarrera { get; set; }
     }
 }

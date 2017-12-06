@@ -16,8 +16,8 @@ namespace IMS_Project.Models
     {
         public carrera()
         {
-            this.curso = new HashSet<curso>();
             this.matricula = new HashSet<matricula>();
+            this.curso = new HashSet<curso>();
         }
     
         public int id { get; set; }
@@ -26,7 +26,7 @@ namespace IMS_Project.Models
         public Nullable<int> total_creditos { get; set; }
     
         public virtual tipocarrera tipocarrera { get; set; }
-        public virtual ICollection<curso> curso { get; set; }
         public virtual ICollection<matricula> matricula { get; set; }
+        public virtual ICollection<curso> curso { get; set; }
     }
 }

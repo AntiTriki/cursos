@@ -24,7 +24,7 @@ namespace IMS_Project.Models
         public Nullable<System.DateTime> fecha_fin { get; set; }
         public Nullable<int> id_carrera { get; set; }
     
-        public virtual ICollection<inscripcion> inscripcion { get; set; }
         public virtual carrera carrera { get; set; }
+        public virtual ICollection<inscripcion> inscripcion { get; set; }
     }
 }
