@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="cursosModelStoreContainer" CdmEntityContainer="cursosEntities">
+    <EntitySetMapping Name="aula">
+      <EntityTypeMapping TypeName="cursosModel.aula">
+        <MappingFragment StoreEntitySet="aula">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="plazas" ColumnName="plazas" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="nro_aula" ColumnName="nro_aula" />
+          <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="carrera">
+      <EntityTypeMapping TypeName="cursosModel.carrera">
+        <MappingFragment StoreEntitySet="carrera">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_tipocarrera" ColumnName="id_tipocarrera" />
+          <ScalarProperty Name="total_creditos" ColumnName="total_creditos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="curso">
+      <EntityTypeMapping TypeName="cursosModel.curso">
+        <MappingFragment StoreEntitySet="curso">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="creditos" ColumnName="creditos" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estudiante">
+      <EntityTypeMapping TypeName="cursosModel.estudiante">
+        <MappingFragment StoreEntitySet="estudiante">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="ci" ColumnName="ci" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grupo">
+      <EntityTypeMapping TypeName="cursosModel.grupo">
+        <MappingFragment StoreEntitySet="grupo">
+          <ScalarProperty Name="horario" ColumnName="horario" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="id_aula" ColumnName="id_aula" />
+          <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inscripcion">
+      <EntityTypeMapping TypeName="cursosModel.inscripcion">
+        <MappingFragment StoreEntitySet="inscripcion">
+          <ScalarProperty Name="horario" ColumnName="horario" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_matricula" ColumnName="id_matricula" />
+          <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+          <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="matricula">
+      <EntityTypeMapping TypeName="cursosModel.matricula">
+        <MappingFragment StoreEntitySet="matricula">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nota">
+      <EntityTypeMapping TypeName="cursosModel.nota">
+        <MappingFragment StoreEntitySet="nota">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="puntaje" ColumnName="puntaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pago">
+      <EntityTypeMapping TypeName="cursosModel.pago">
+        <MappingFragment StoreEntitySet="pago">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="profesor">
+      <EntityTypeMapping TypeName="cursosModel.profesor">
+        <MappingFragment StoreEntitySet="profesor">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ci" ColumnName="ci" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipocarrera">
+      <EntityTypeMapping TypeName="cursosModel.tipocarrera">
+        <MappingFragment StoreEntitySet="tipocarrera">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="tiempo" ColumnName="tiempo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="detalle_eng">
+      <EntityTypeMapping TypeName="cursosModel.detalle_eng">
+        <MappingFragment StoreEntitySet="detalle_eng">
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+          <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+          <ScalarProperty Name="id_nota" ColumnName="id_nota" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="detalle_cc" TypeName="cursosModel.detalle_cc" StoreEntitySet="detalle_cc">
+      <EndProperty Name="carrera">
+        <ScalarProperty Name="id" ColumnName="id_carrera" />
+      </EndProperty>
+      <EndProperty Name="curso">
+        <ScalarProperty Name="id" ColumnName="id_curso" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="detalle_gp" TypeName="cursosModel.detalle_gp" StoreEntitySet="detalle_gp">
+      <EndProperty Name="grupo">
+        <ScalarProperty Name="id" ColumnName="id_grupo" />
+      </EndProperty>
+      <EndProperty Name="profesor">
+        <ScalarProperty Name="id" ColumnName="id_profesor" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="cursosModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

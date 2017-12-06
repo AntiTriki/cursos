@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cursosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aula">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="plazas" Type="int" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="nro_aula" Type="varchar" MaxLength="50" />
+    <Property Name="ubicacion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="carrera">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="id_tipocarrera" Type="int" />
+    <Property Name="total_creditos" Type="int" />
+  </EntityType>
+  <EntityType Name="curso">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="creditos" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="detalle_cc">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+      <PropertyRef Name="id_curso" />
+    </Key>
+    <Property Name="id_carrera" Type="int" Nullable="false" />
+    <Property Name="id_curso" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'cursos.dbo.detalle_eng' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="detalle_eng">
+    <Key>
+      <PropertyRef Name="id_grupo" />
+      <PropertyRef Name="id_estudiante" />
+      <PropertyRef Name="id_nota" />
+    </Key>
+    <Property Name="id_grupo" Type="int" Nullable="false" />
+    <Property Name="id_estudiante" Type="int" Nullable="false" />
+    <Property Name="id_nota" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="detalle_gp">
+    <Key>
+      <PropertyRef Name="id_grupo" />
+      <PropertyRef Name="id_profesor" />
+    </Key>
+    <Property Name="id_grupo" Type="int" Nullable="false" />
+    <Property Name="id_profesor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="estudiante">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" />
+    <Property Name="ci" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="grupo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="horario" Type="varchar" MaxLength="20" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_inicio" Type="date" />
+    <Property Name="fecha_fin" Type="date" />
+    <Property Name="id_aula" Type="int" />
+    <Property Name="id_curso" Type="int" />
+  </EntityType>
+  <EntityType Name="inscripcion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="horario" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_matricula" Type="int" />
+    <Property Name="id_pago" Type="int" />
+    <Property Name="id_alumno" Type="int" />
+    <Property Name="fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="matricula">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_inicio" Type="date" />
+    <Property Name="fecha_fin" Type="date" />
+    <Property Name="id_carrera" Type="int" />
+  </EntityType>
+  <EntityType Name="nota">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="puntaje" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="pago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="estado" Type="int" />
+    <Property Name="fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="profesor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ci" Type="varchar" MaxLength="50" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="titulo" Type="varchar" MaxLength="50" />
+    <Property Name="especialidad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tipocarrera">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="tiempo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_carrera_tipocarrera">
+    <End Role="tipocarrera" Type="Self.tipocarrera" Multiplicity="0..1" />
+    <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipocarrera">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="carrera">
+        <PropertyRef Name="id_tipocarrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_cc_carrera">
+    <End Role="carrera" Type="Self.carrera" Multiplicity="1" />
+    <End Role="detalle_cc" Type="Self.detalle_cc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="carrera">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_cc">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_cc_curso">
+    <End Role="curso" Type="Self.curso" Multiplicity="1" />
+    <End Role="detalle_cc" Type="Self.detalle_cc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="curso">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_cc">
+        <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_eng_estudiante">
+    <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+    <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiante">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_eng">
+        <PropertyRef Name="id_estudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_eng_grupo">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+    <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_eng">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_eng_nota">
+    <End Role="nota" Type="Self.nota" Multiplicity="1" />
+    <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nota">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_eng">
+        <PropertyRef Name="id_nota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_gp_grupo">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+    <End Role="detalle_gp" Type="Self.detalle_gp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_gp">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detalle_gp_profesor">
+    <End Role="profesor" Type="Self.profesor" Multiplicity="1" />
+    <End Role="detalle_gp" Type="Self.detalle_gp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="profesor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle_gp">
+        <PropertyRef Name="id_profesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupo_aula">
+    <End Role="aula" Type="Self.aula" Multiplicity="0..1" />
+    <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aula">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupo">
+        <PropertyRef Name="id_aula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupo_curso">
+    <End Role="curso" Type="Self.curso" Multiplicity="0..1" />
+    <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="curso">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupo">
+        <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_inscripcion_estudiante">
+    <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
+    <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiante">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="inscripcion">
+        <PropertyRef Name="id_alumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_inscripcion_matricula">
+    <End Role="matricula" Type="Self.matricula" Multiplicity="0..1" />
+    <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="matricula">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="inscripcion">
+        <PropertyRef Name="id_matricula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_inscripcion_pago">
+    <End Role="pago" Type="Self.pago" Multiplicity="0..1" />
+    <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pago">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="inscripcion">
+        <PropertyRef Name="id_pago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_matricula_carrera">
+    <End Role="carrera" Type="Self.carrera" Multiplicity="0..1" />
+    <End Role="matricula" Type="Self.matricula" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="carrera">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="matricula">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="cursosModelStoreContainer">
+    <EntitySet Name="aula" EntityType="Self.aula" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="carrera" EntityType="Self.carrera" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="curso" EntityType="Self.curso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estudiante" EntityType="Self.estudiante" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="grupo" EntityType="Self.grupo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="inscripcion" EntityType="Self.inscripcion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="matricula" EntityType="Self.matricula" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="nota" EntityType="Self.nota" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="profesor" EntityType="Self.profesor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tipocarrera" EntityType="Self.tipocarrera" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="detalle_cc" EntityType="Self.detalle_cc" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[detalle_cc].[id_carrera] AS [id_carrera], 
+[detalle_cc].[id_curso] AS [id_curso]
+FROM [dbo].[detalle_cc] AS [detalle_cc]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="detalle_eng" EntityType="Self.detalle_eng" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[detalle_eng].[id_grupo] AS [id_grupo], 
+[detalle_eng].[id_estudiante] AS [id_estudiante], 
+[detalle_eng].[id_nota] AS [id_nota]
+FROM [dbo].[detalle_eng] AS [detalle_eng]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="detalle_gp" EntityType="Self.detalle_gp" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[detalle_gp].[id_grupo] AS [id_grupo], 
+[detalle_gp].[id_profesor] AS [id_profesor]
+FROM [dbo].[detalle_gp] AS [detalle_gp]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_carrera_tipocarrera" Association="Self.FK_carrera_tipocarrera">
+      <End Role="tipocarrera" EntitySet="tipocarrera" />
+      <End Role="carrera" EntitySet="carrera" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_cc_carrera" Association="Self.FK_detalle_cc_carrera">
+      <End Role="carrera" EntitySet="carrera" />
+      <End Role="detalle_cc" EntitySet="detalle_cc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_cc_curso" Association="Self.FK_detalle_cc_curso">
+      <End Role="curso" EntitySet="curso" />
+      <End Role="detalle_cc" EntitySet="detalle_cc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_eng_estudiante" Association="Self.FK_detalle_eng_estudiante">
+      <End Role="estudiante" EntitySet="estudiante" />
+      <End Role="detalle_eng" EntitySet="detalle_eng" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_eng_grupo" Association="Self.FK_detalle_eng_grupo">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="detalle_eng" EntitySet="detalle_eng" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_eng_nota" Association="Self.FK_detalle_eng_nota">
+      <End Role="nota" EntitySet="nota" />
+      <End Role="detalle_eng" EntitySet="detalle_eng" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_gp_grupo" Association="Self.FK_detalle_gp_grupo">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="detalle_gp" EntitySet="detalle_gp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detalle_gp_profesor" Association="Self.FK_detalle_gp_profesor">
+      <End Role="profesor" EntitySet="profesor" />
+      <End Role="detalle_gp" EntitySet="detalle_gp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupo_aula" Association="Self.FK_grupo_aula">
+      <End Role="aula" EntitySet="aula" />
+      <End Role="grupo" EntitySet="grupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupo_curso" Association="Self.FK_grupo_curso">
+      <End Role="curso" EntitySet="curso" />
+      <End Role="grupo" EntitySet="grupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
+      <End Role="estudiante" EntitySet="estudiante" />
+      <End Role="inscripcion" EntitySet="inscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inscripcion_matricula" Association="Self.FK_inscripcion_matricula">
+      <End Role="matricula" EntitySet="matricula" />
+      <End Role="inscripcion" EntitySet="inscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_inscripcion_pago" Association="Self.FK_inscripcion_pago">
+      <End Role="pago" EntitySet="pago" />
+      <End Role="inscripcion" EntitySet="inscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_matricula_carrera" Association="Self.FK_matricula_carrera">
+      <End Role="carrera" EntitySet="carrera" />
+      <End Role="matricula" EntitySet="matricula" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

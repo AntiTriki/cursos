@@ -1,0 +1,925 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cursosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plazas" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="nro_aula" Type="varchar" MaxLength="50" />
+          <Property Name="ubicacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="carrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="id_tipocarrera" Type="int" />
+          <Property Name="total_creditos" Type="int" />
+        </EntityType>
+        <EntityType Name="curso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="creditos" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detalle_cc">
+          <Key>
+            <PropertyRef Name="id_carrera" />
+            <PropertyRef Name="id_curso" />
+          </Key>
+          <Property Name="id_carrera" Type="int" Nullable="false" />
+          <Property Name="id_curso" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'cursos.dbo.detalle_eng' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detalle_eng">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+            <PropertyRef Name="id_estudiante" />
+            <PropertyRef Name="id_nota" />
+          </Key>
+          <Property Name="id_grupo" Type="int" Nullable="false" />
+          <Property Name="id_estudiante" Type="int" Nullable="false" />
+          <Property Name="id_nota" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="detalle_gp">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+            <PropertyRef Name="id_profesor" />
+          </Key>
+          <Property Name="id_grupo" Type="int" Nullable="false" />
+          <Property Name="id_profesor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estudiante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="ci" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="horario" Type="varchar" MaxLength="20" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+          <Property Name="id_aula" Type="int" />
+          <Property Name="id_curso" Type="int" />
+        </EntityType>
+        <EntityType Name="inscripcion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="horario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_matricula" Type="int" />
+          <Property Name="id_pago" Type="int" />
+          <Property Name="id_alumno" Type="int" />
+          <Property Name="fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="matricula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" />
+          <Property Name="fecha_fin" Type="date" />
+          <Property Name="id_carrera" Type="int" />
+        </EntityType>
+        <EntityType Name="nota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="puntaje" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="estado" Type="int" />
+          <Property Name="fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="profesor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ci" Type="varchar" MaxLength="50" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="titulo" Type="varchar" MaxLength="50" />
+          <Property Name="especialidad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tipocarrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="tiempo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_carrera_tipocarrera">
+          <End Role="tipocarrera" Type="Self.tipocarrera" Multiplicity="0..1" />
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipocarrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carrera">
+              <PropertyRef Name="id_tipocarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_cc_carrera">
+          <End Role="carrera" Type="Self.carrera" Multiplicity="1" />
+          <End Role="detalle_cc" Type="Self.detalle_cc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_cc">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_cc_curso">
+          <End Role="curso" Type="Self.curso" Multiplicity="1" />
+          <End Role="detalle_cc" Type="Self.detalle_cc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_cc">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_eng_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+          <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_eng">
+              <PropertyRef Name="id_estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_eng_grupo">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_eng">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_eng_nota">
+          <End Role="nota" Type="Self.nota" Multiplicity="1" />
+          <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nota">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_eng">
+              <PropertyRef Name="id_nota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_gp_grupo">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="detalle_gp" Type="Self.detalle_gp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_gp">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_gp_profesor">
+          <End Role="profesor" Type="Self.profesor" Multiplicity="1" />
+          <End Role="detalle_gp" Type="Self.detalle_gp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_gp">
+              <PropertyRef Name="id_profesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupo_aula">
+          <End Role="aula" Type="Self.aula" Multiplicity="0..1" />
+          <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aula">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grupo">
+              <PropertyRef Name="id_aula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupo_curso">
+          <End Role="curso" Type="Self.curso" Multiplicity="0..1" />
+          <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grupo">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_matricula">
+          <End Role="matricula" Type="Self.matricula" Multiplicity="0..1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="matricula">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="id_matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_pago">
+          <End Role="pago" Type="Self.pago" Multiplicity="0..1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pago">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="id_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_matricula_carrera">
+          <End Role="carrera" Type="Self.carrera" Multiplicity="0..1" />
+          <End Role="matricula" Type="Self.matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="matricula">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cursosModelStoreContainer">
+          <EntitySet Name="aula" EntityType="Self.aula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="carrera" EntityType="Self.carrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="curso" EntityType="Self.curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estudiante" EntityType="Self.estudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inscripcion" EntityType="Self.inscripcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="matricula" EntityType="Self.matricula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nota" EntityType="Self.nota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profesor" EntityType="Self.profesor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipocarrera" EntityType="Self.tipocarrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_cc" EntityType="Self.detalle_cc" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[detalle_cc].[id_carrera] AS [id_carrera], 
+[detalle_cc].[id_curso] AS [id_curso]
+FROM [dbo].[detalle_cc] AS [detalle_cc]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detalle_eng" EntityType="Self.detalle_eng" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[detalle_eng].[id_grupo] AS [id_grupo], 
+[detalle_eng].[id_estudiante] AS [id_estudiante], 
+[detalle_eng].[id_nota] AS [id_nota]
+FROM [dbo].[detalle_eng] AS [detalle_eng]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="detalle_gp" EntityType="Self.detalle_gp" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[detalle_gp].[id_grupo] AS [id_grupo], 
+[detalle_gp].[id_profesor] AS [id_profesor]
+FROM [dbo].[detalle_gp] AS [detalle_gp]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_carrera_tipocarrera" Association="Self.FK_carrera_tipocarrera">
+            <End Role="tipocarrera" EntitySet="tipocarrera" />
+            <End Role="carrera" EntitySet="carrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_cc_carrera" Association="Self.FK_detalle_cc_carrera">
+            <End Role="carrera" EntitySet="carrera" />
+            <End Role="detalle_cc" EntitySet="detalle_cc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_cc_curso" Association="Self.FK_detalle_cc_curso">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="detalle_cc" EntitySet="detalle_cc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_eng_estudiante" Association="Self.FK_detalle_eng_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="detalle_eng" EntitySet="detalle_eng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_eng_grupo" Association="Self.FK_detalle_eng_grupo">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="detalle_eng" EntitySet="detalle_eng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_eng_nota" Association="Self.FK_detalle_eng_nota">
+            <End Role="nota" EntitySet="nota" />
+            <End Role="detalle_eng" EntitySet="detalle_eng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_gp_grupo" Association="Self.FK_detalle_gp_grupo">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="detalle_gp" EntitySet="detalle_gp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_gp_profesor" Association="Self.FK_detalle_gp_profesor">
+            <End Role="profesor" EntitySet="profesor" />
+            <End Role="detalle_gp" EntitySet="detalle_gp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupo_aula" Association="Self.FK_grupo_aula">
+            <End Role="aula" EntitySet="aula" />
+            <End Role="grupo" EntitySet="grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupo_curso" Association="Self.FK_grupo_curso">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="grupo" EntitySet="grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_matricula" Association="Self.FK_inscripcion_matricula">
+            <End Role="matricula" EntitySet="matricula" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_pago" Association="Self.FK_inscripcion_pago">
+            <End Role="pago" EntitySet="pago" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_matricula_carrera" Association="Self.FK_matricula_carrera">
+            <End Role="carrera" EntitySet="carrera" />
+            <End Role="matricula" EntitySet="matricula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cursosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="aula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plazas" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nro_aula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ubicacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grupo" Relationship="Self.FK_grupo_aula" FromRole="aula" ToRole="grupo" />
+        </EntityType>
+        <EntityType Name="carrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_tipocarrera" Type="Int32" />
+          <Property Name="total_creditos" Type="Int32" />
+          <NavigationProperty Name="tipocarrera" Relationship="Self.FK_carrera_tipocarrera" FromRole="carrera" ToRole="tipocarrera" />
+          <NavigationProperty Name="curso" Relationship="Self.detalle_cc" FromRole="carrera" ToRole="curso" />
+          <NavigationProperty Name="matricula" Relationship="cursosModel.FK_matricula_carrera" FromRole="carrera" ToRole="matricula" />
+        </EntityType>
+        <EntityType Name="curso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="creditos" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grupo" Relationship="Self.FK_grupo_curso" FromRole="curso" ToRole="grupo" />
+          <NavigationProperty Name="carrera" Relationship="Self.detalle_cc" FromRole="curso" ToRole="carrera" />
+        </EntityType>
+        <EntityType Name="estudiante">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="detalle_eng" Relationship="Self.FK_detalle_eng_estudiante" FromRole="estudiante" ToRole="detalle_eng" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.FK_inscripcion_estudiante" FromRole="estudiante" ToRole="inscripcion" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="horario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="id_aula" Type="Int32" />
+          <Property Name="id_curso" Type="Int32" />
+          <NavigationProperty Name="aula" Relationship="Self.FK_grupo_aula" FromRole="grupo" ToRole="aula" />
+          <NavigationProperty Name="curso" Relationship="Self.FK_grupo_curso" FromRole="grupo" ToRole="curso" />
+          <NavigationProperty Name="detalle_eng" Relationship="Self.FK_detalle_eng_grupo" FromRole="grupo" ToRole="detalle_eng" />
+          <NavigationProperty Name="profesor" Relationship="Self.detalle_gp" FromRole="grupo" ToRole="profesor" />
+        </EntityType>
+        <EntityType Name="inscripcion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="horario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_matricula" Type="Int32" />
+          <Property Name="id_pago" Type="Int32" />
+          <Property Name="id_alumno" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="estudiante" Relationship="Self.FK_inscripcion_estudiante" FromRole="inscripcion" ToRole="estudiante" />
+          <NavigationProperty Name="matricula" Relationship="Self.FK_inscripcion_matricula" FromRole="inscripcion" ToRole="matricula" />
+          <NavigationProperty Name="pago" Relationship="Self.FK_inscripcion_pago" FromRole="inscripcion" ToRole="pago" />
+        </EntityType>
+        <EntityType Name="matricula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="id_carrera" Type="Int32" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.FK_inscripcion_matricula" FromRole="matricula" ToRole="inscripcion" />
+          <NavigationProperty Name="carrera" Relationship="cursosModel.FK_matricula_carrera" FromRole="matricula" ToRole="carrera" />
+        </EntityType>
+        <EntityType Name="nota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="puntaje" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="detalle_eng" Relationship="Self.FK_detalle_eng_nota" FromRole="nota" ToRole="detalle_eng" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.FK_inscripcion_pago" FromRole="pago" ToRole="inscripcion" />
+        </EntityType>
+        <EntityType Name="profesor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grupo" Relationship="Self.detalle_gp" FromRole="profesor" ToRole="grupo" />
+        </EntityType>
+        <EntityType Name="tipocarrera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tiempo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="carrera" Relationship="Self.FK_carrera_tipocarrera" FromRole="tipocarrera" ToRole="carrera" />
+        </EntityType>
+        <EntityType Name="detalle_eng">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+            <PropertyRef Name="id_estudiante" />
+            <PropertyRef Name="id_nota" />
+          </Key>
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="id_estudiante" Type="Int32" Nullable="false" />
+          <Property Name="id_nota" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="estudiante" Relationship="Self.FK_detalle_eng_estudiante" FromRole="detalle_eng" ToRole="estudiante" />
+          <NavigationProperty Name="grupo" Relationship="Self.FK_detalle_eng_grupo" FromRole="detalle_eng" ToRole="grupo" />
+          <NavigationProperty Name="nota" Relationship="Self.FK_detalle_eng_nota" FromRole="detalle_eng" ToRole="nota" />
+        </EntityType>
+        <Association Name="FK_grupo_aula">
+          <End Role="aula" Type="Self.aula" Multiplicity="0..1" />
+          <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aula">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grupo">
+              <PropertyRef Name="id_aula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_carrera_tipocarrera">
+          <End Role="tipocarrera" Type="Self.tipocarrera" Multiplicity="0..1" />
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipocarrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="carrera">
+              <PropertyRef Name="id_tipocarrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grupo_curso">
+          <End Role="curso" Type="Self.curso" Multiplicity="0..1" />
+          <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grupo">
+              <PropertyRef Name="id_curso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_eng_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+          <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_eng">
+              <PropertyRef Name="id_estudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="id_alumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_eng_grupo">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_eng">
+              <PropertyRef Name="id_grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_matricula">
+          <End Role="matricula" Type="Self.matricula" Multiplicity="0..1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="matricula">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="id_matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inscripcion_pago">
+          <End Role="pago" Type="Self.pago" Multiplicity="0..1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pago">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="id_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_eng_nota">
+          <End Role="nota" Type="Self.nota" Multiplicity="1" />
+          <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nota">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_eng">
+              <PropertyRef Name="id_nota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="detalle_cc">
+          <End Role="carrera" Type="Self.carrera" Multiplicity="*" />
+          <End Role="curso" Type="Self.curso" Multiplicity="*" />
+        </Association>
+        <Association Name="detalle_gp">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+          <End Role="profesor" Type="Self.profesor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="cursosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aula" EntityType="Self.aula" />
+          <EntitySet Name="carrera" EntityType="Self.carrera" />
+          <EntitySet Name="curso" EntityType="Self.curso" />
+          <EntitySet Name="estudiante" EntityType="Self.estudiante" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" />
+          <EntitySet Name="inscripcion" EntityType="Self.inscripcion" />
+          <EntitySet Name="matricula" EntityType="Self.matricula" />
+          <EntitySet Name="nota" EntityType="Self.nota" />
+          <EntitySet Name="pago" EntityType="Self.pago" />
+          <EntitySet Name="profesor" EntityType="Self.profesor" />
+          <EntitySet Name="tipocarrera" EntityType="Self.tipocarrera" />
+          <EntitySet Name="detalle_eng" EntityType="Self.detalle_eng" />
+          <AssociationSet Name="FK_grupo_aula" Association="Self.FK_grupo_aula">
+            <End Role="aula" EntitySet="aula" />
+            <End Role="grupo" EntitySet="grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_carrera_tipocarrera" Association="Self.FK_carrera_tipocarrera">
+            <End Role="tipocarrera" EntitySet="tipocarrera" />
+            <End Role="carrera" EntitySet="carrera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grupo_curso" Association="Self.FK_grupo_curso">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="grupo" EntitySet="grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_eng_estudiante" Association="Self.FK_detalle_eng_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="detalle_eng" EntitySet="detalle_eng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_eng_grupo" Association="Self.FK_detalle_eng_grupo">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="detalle_eng" EntitySet="detalle_eng" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_matricula" Association="Self.FK_inscripcion_matricula">
+            <End Role="matricula" EntitySet="matricula" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inscripcion_pago" Association="Self.FK_inscripcion_pago">
+            <End Role="pago" EntitySet="pago" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_eng_nota" Association="Self.FK_detalle_eng_nota">
+            <End Role="nota" EntitySet="nota" />
+            <End Role="detalle_eng" EntitySet="detalle_eng" />
+          </AssociationSet>
+          <AssociationSet Name="detalle_cc" Association="Self.detalle_cc">
+            <End Role="carrera" EntitySet="carrera" />
+            <End Role="curso" EntitySet="curso" />
+          </AssociationSet>
+          <AssociationSet Name="detalle_gp" Association="Self.detalle_gp">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="profesor" EntitySet="profesor" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="cursosModel.sysdiagrams" />
+          <AssociationSet Name="FK_matricula_carrera" Association="cursosModel.FK_matricula_carrera">
+            <End Role="carrera" EntitySet="carrera" />
+            <End Role="matricula" EntitySet="matricula" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_matricula_carrera">
+          <End Type="cursosModel.carrera" Role="carrera" Multiplicity="0..1" />
+          <End Type="cursosModel.matricula" Role="matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="carrera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="matricula">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cursosModelStoreContainer" CdmEntityContainer="cursosEntities">
+          <EntitySetMapping Name="aula">
+            <EntityTypeMapping TypeName="cursosModel.aula">
+              <MappingFragment StoreEntitySet="aula">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="plazas" ColumnName="plazas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nro_aula" ColumnName="nro_aula" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carrera">
+            <EntityTypeMapping TypeName="cursosModel.carrera">
+              <MappingFragment StoreEntitySet="carrera">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_tipocarrera" ColumnName="id_tipocarrera" />
+                <ScalarProperty Name="total_creditos" ColumnName="total_creditos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="curso">
+            <EntityTypeMapping TypeName="cursosModel.curso">
+              <MappingFragment StoreEntitySet="curso">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estudiante">
+            <EntityTypeMapping TypeName="cursosModel.estudiante">
+              <MappingFragment StoreEntitySet="estudiante">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="ci" ColumnName="ci" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupo">
+            <EntityTypeMapping TypeName="cursosModel.grupo">
+              <MappingFragment StoreEntitySet="grupo">
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="id_aula" ColumnName="id_aula" />
+                <ScalarProperty Name="id_curso" ColumnName="id_curso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inscripcion">
+            <EntityTypeMapping TypeName="cursosModel.inscripcion">
+              <MappingFragment StoreEntitySet="inscripcion">
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_matricula" ColumnName="id_matricula" />
+                <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+                <ScalarProperty Name="id_alumno" ColumnName="id_alumno" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="matricula">
+            <EntityTypeMapping TypeName="cursosModel.matricula">
+              <MappingFragment StoreEntitySet="matricula">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nota">
+            <EntityTypeMapping TypeName="cursosModel.nota">
+              <MappingFragment StoreEntitySet="nota">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="puntaje" ColumnName="puntaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pago">
+            <EntityTypeMapping TypeName="cursosModel.pago">
+              <MappingFragment StoreEntitySet="pago">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profesor">
+            <EntityTypeMapping TypeName="cursosModel.profesor">
+              <MappingFragment StoreEntitySet="profesor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ci" ColumnName="ci" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipocarrera">
+            <EntityTypeMapping TypeName="cursosModel.tipocarrera">
+              <MappingFragment StoreEntitySet="tipocarrera">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="tiempo" ColumnName="tiempo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalle_eng">
+            <EntityTypeMapping TypeName="cursosModel.detalle_eng">
+              <MappingFragment StoreEntitySet="detalle_eng">
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+                <ScalarProperty Name="id_nota" ColumnName="id_nota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="detalle_cc" TypeName="cursosModel.detalle_cc" StoreEntitySet="detalle_cc">
+            <EndProperty Name="carrera">
+              <ScalarProperty Name="id" ColumnName="id_carrera" />
+            </EndProperty>
+            <EndProperty Name="curso">
+              <ScalarProperty Name="id" ColumnName="id_curso" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="detalle_gp" TypeName="cursosModel.detalle_gp" StoreEntitySet="detalle_gp">
+            <EndProperty Name="grupo">
+              <ScalarProperty Name="id" ColumnName="id_grupo" />
+            </EndProperty>
+            <EndProperty Name="profesor">
+              <ScalarProperty Name="id" ColumnName="id_profesor" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="cursosModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
