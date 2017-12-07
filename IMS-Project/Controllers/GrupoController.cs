@@ -26,8 +26,8 @@ namespace IMS_Project.Controllers
         }
         public void GetViewBagData()
         {
-            ViewBag.id_profesor = new SelectList(db.profesor, "id", "profesor");
-            ViewBag.id_estudiante = new SelectList(db.estudiante, "id", "estudiante");
+            ViewBag.id_profesor = new SelectList(db.profesor, "id", "nombre");
+            ViewBag.id_estudiante = new SelectList(db.estudiante, "id", "nombre");
             ViewBag.id_curso = new SelectList(db.curso, "id", "nombre");
         }
 

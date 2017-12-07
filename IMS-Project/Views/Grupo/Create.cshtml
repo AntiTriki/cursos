@@ -29,6 +29,22 @@
                     @Html.ValidationMessageFor(model => model.id_curso, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.id_curso, "Profesor", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.DropDownList("id_profesor", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_profesor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.id_curso, "Estudiante", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.DropDownList("id_estudiante", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_estudiante, "", new { @class = "text-danger" })
+                </div>
+            </div> 
            
 
             
@@ -45,7 +61,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Update" class="btn btn-primary" />
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
                 </div>
             </div>
         </div>
