@@ -28,7 +28,7 @@ namespace IMS_Project.Controllers
         {
             ViewBag.id_profesor = new SelectList(db.profesor, "id", "profesor");
             ViewBag.id_estudiante = new SelectList(db.estudiante, "id", "estudiante");
-            ViewBag.id_curso = new SelectList(db.curso, "id", "curso");
+            ViewBag.id_curso = new SelectList(db.curso, "id", "nombre");
         }
 
         [HttpPost]

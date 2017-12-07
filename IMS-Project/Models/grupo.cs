@@ -22,6 +22,7 @@ namespace IMS_Project.Models
         public Nullable<int> id_curso { get; set; }
         public Nullable<int> id_profesor { get; set; }
         public Nullable<int> id_estudiante { get; set; }
+        public string nombre { get; set; }
     
         public virtual aula aula { get; set; }
         public virtual curso curso { get; set; }

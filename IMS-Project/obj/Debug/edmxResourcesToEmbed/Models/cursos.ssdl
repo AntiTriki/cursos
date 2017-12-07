@@ -37,28 +37,6 @@ warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key
     <Property Name="id_carrera" Type="int" Nullable="false" />
     <Property Name="id_curso" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'cursos.dbo.detalle_eng' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="detalle_eng">
-    <Key>
-      <PropertyRef Name="id_grupo" />
-      <PropertyRef Name="id_estudiante" />
-      <PropertyRef Name="id_nota" />
-    </Key>
-    <Property Name="id_grupo" Type="int" Nullable="false" />
-    <Property Name="id_estudiante" Type="int" Nullable="false" />
-    <Property Name="id_nota" Type="int" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="detalle_gp">
-    <Key>
-      <PropertyRef Name="id_grupo" />
-      <PropertyRef Name="id_profesor" />
-    </Key>
-    <Property Name="id_grupo" Type="int" Nullable="false" />
-    <Property Name="id_profesor" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="estudiante">
     <Key>
       <PropertyRef Name="id" />
@@ -78,6 +56,9 @@ warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key
     <Property Name="fecha_fin" Type="date" />
     <Property Name="id_aula" Type="int" />
     <Property Name="id_curso" Type="int" />
+    <Property Name="id_profesor" Type="int" />
+    <Property Name="id_estudiante" Type="int" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="inscripcion">
     <Key>
@@ -179,66 +160,6 @@ warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_detalle_eng_estudiante">
-    <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
-    <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="estudiante">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_eng">
-        <PropertyRef Name="id_estudiante" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_detalle_eng_grupo">
-    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
-    <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="grupo">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_eng">
-        <PropertyRef Name="id_grupo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_detalle_eng_nota">
-    <End Role="nota" Type="Self.nota" Multiplicity="1" />
-    <End Role="detalle_eng" Type="Self.detalle_eng" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="nota">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_eng">
-        <PropertyRef Name="id_nota" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_detalle_gp_grupo">
-    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
-    <End Role="detalle_gp" Type="Self.detalle_gp" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="grupo">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_gp">
-        <PropertyRef Name="id_grupo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_detalle_gp_profesor">
-    <End Role="profesor" Type="Self.profesor" Multiplicity="1" />
-    <End Role="detalle_gp" Type="Self.detalle_gp" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="profesor">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="detalle_gp">
-        <PropertyRef Name="id_profesor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_grupo_aula">
     <End Role="aula" Type="Self.aula" Multiplicity="0..1" />
     <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
@@ -260,6 +181,30 @@ warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key
       </Principal>
       <Dependent Role="grupo">
         <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupo_estudiante">
+    <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
+    <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiante">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupo">
+        <PropertyRef Name="id_estudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupo_profesor">
+    <End Role="profesor" Type="Self.profesor" Multiplicity="0..1" />
+    <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="profesor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupo">
+        <PropertyRef Name="id_profesor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -330,19 +275,6 @@ warning 6002: The table/view 'cursos.dbo.detalle_gp' does not have a primary key
 [detalle_cc].[id_curso] AS [id_curso]
 FROM [dbo].[detalle_cc] AS [detalle_cc]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="detalle_eng" EntityType="Self.detalle_eng" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-[detalle_eng].[id_grupo] AS [id_grupo], 
-[detalle_eng].[id_estudiante] AS [id_estudiante], 
-[detalle_eng].[id_nota] AS [id_nota]
-FROM [dbo].[detalle_eng] AS [detalle_eng]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="detalle_gp" EntityType="Self.detalle_gp" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-[detalle_gp].[id_grupo] AS [id_grupo], 
-[detalle_gp].[id_profesor] AS [id_profesor]
-FROM [dbo].[detalle_gp] AS [detalle_gp]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_carrera_tipocarrera" Association="Self.FK_carrera_tipocarrera">
       <End Role="tipocarrera" EntitySet="tipocarrera" />
       <End Role="carrera" EntitySet="carrera" />
@@ -355,32 +287,20 @@ FROM [dbo].[detalle_gp] AS [detalle_gp]</DefiningQuery>
       <End Role="curso" EntitySet="curso" />
       <End Role="detalle_cc" EntitySet="detalle_cc" />
     </AssociationSet>
-    <AssociationSet Name="FK_detalle_eng_estudiante" Association="Self.FK_detalle_eng_estudiante">
-      <End Role="estudiante" EntitySet="estudiante" />
-      <End Role="detalle_eng" EntitySet="detalle_eng" />
-    </AssociationSet>
-    <AssociationSet Name="FK_detalle_eng_grupo" Association="Self.FK_detalle_eng_grupo">
-      <End Role="grupo" EntitySet="grupo" />
-      <End Role="detalle_eng" EntitySet="detalle_eng" />
-    </AssociationSet>
-    <AssociationSet Name="FK_detalle_eng_nota" Association="Self.FK_detalle_eng_nota">
-      <End Role="nota" EntitySet="nota" />
-      <End Role="detalle_eng" EntitySet="detalle_eng" />
-    </AssociationSet>
-    <AssociationSet Name="FK_detalle_gp_grupo" Association="Self.FK_detalle_gp_grupo">
-      <End Role="grupo" EntitySet="grupo" />
-      <End Role="detalle_gp" EntitySet="detalle_gp" />
-    </AssociationSet>
-    <AssociationSet Name="FK_detalle_gp_profesor" Association="Self.FK_detalle_gp_profesor">
-      <End Role="profesor" EntitySet="profesor" />
-      <End Role="detalle_gp" EntitySet="detalle_gp" />
-    </AssociationSet>
     <AssociationSet Name="FK_grupo_aula" Association="Self.FK_grupo_aula">
       <End Role="aula" EntitySet="aula" />
       <End Role="grupo" EntitySet="grupo" />
     </AssociationSet>
     <AssociationSet Name="FK_grupo_curso" Association="Self.FK_grupo_curso">
       <End Role="curso" EntitySet="curso" />
+      <End Role="grupo" EntitySet="grupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupo_estudiante" Association="Self.FK_grupo_estudiante">
+      <End Role="estudiante" EntitySet="estudiante" />
+      <End Role="grupo" EntitySet="grupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupo_profesor" Association="Self.FK_grupo_profesor">
+      <End Role="profesor" EntitySet="profesor" />
       <End Role="grupo" EntitySet="grupo" />
     </AssociationSet>
     <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
