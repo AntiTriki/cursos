@@ -41,8 +41,9 @@
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_grupo" Type="Int32" />
+    <NavigationProperty Name="grupo" Relationship="Self.FK_estudiante_grupo" FromRole="estudiante" ToRole="grupo" />
     <NavigationProperty Name="inscripcion" Relationship="Self.FK_inscripcion_estudiante" FromRole="estudiante" ToRole="inscripcion" />
-    <NavigationProperty Name="grupo" Relationship="cursosModel.FK_grupo_estudiante" FromRole="estudiante" ToRole="grupo" />
   </EntityType>
   <EntityType Name="grupo">
     <Key>
@@ -55,12 +56,11 @@
     <Property Name="id_aula" Type="Int32" />
     <Property Name="id_curso" Type="Int32" />
     <Property Name="id_profesor" Type="Int32" />
-    <Property Name="id_estudiante" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="aula" Relationship="Self.FK_grupo_aula" FromRole="grupo" ToRole="aula" />
     <NavigationProperty Name="curso" Relationship="Self.FK_grupo_curso" FromRole="grupo" ToRole="curso" />
-    <NavigationProperty Name="estudiante" Relationship="cursosModel.FK_grupo_estudiante" FromRole="grupo" ToRole="estudiante" />
-    <NavigationProperty Name="profesor" Relationship="cursosModel.FK_grupo_profesor" FromRole="grupo" ToRole="profesor" />
-    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="estudiante" Relationship="Self.FK_estudiante_grupo" FromRole="grupo" ToRole="estudiante" />
+    <NavigationProperty Name="profesor" Relationship="Self.FK_grupo_profesor" FromRole="grupo" ToRole="profesor" />
   </EntityType>
   <EntityType Name="inscripcion">
     <Key>
@@ -113,7 +113,7 @@
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="grupo" Relationship="cursosModel.FK_grupo_profesor" FromRole="profesor" ToRole="grupo" />
+    <NavigationProperty Name="grupo" Relationship="Self.FK_grupo_profesor" FromRole="profesor" ToRole="grupo" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -182,6 +182,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_estudiante_grupo">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="0..1" />
+    <End Role="estudiante" Type="Self.estudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="estudiante">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_inscripcion_estudiante">
     <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
     <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
@@ -191,6 +203,18 @@
       </Principal>
       <Dependent Role="inscripcion">
         <PropertyRef Name="id_alumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupo_profesor">
+    <End Role="profesor" Type="Self.profesor" Multiplicity="0..1" />
+    <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="profesor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupo">
+        <PropertyRef Name="id_profesor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -251,9 +275,17 @@
       <End Role="curso" EntitySet="curso" />
       <End Role="grupo" EntitySet="grupo" />
     </AssociationSet>
+    <AssociationSet Name="FK_estudiante_grupo" Association="Self.FK_estudiante_grupo">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="estudiante" EntitySet="estudiante" />
+    </AssociationSet>
     <AssociationSet Name="FK_inscripcion_estudiante" Association="Self.FK_inscripcion_estudiante">
       <End Role="estudiante" EntitySet="estudiante" />
       <End Role="inscripcion" EntitySet="inscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupo_profesor" Association="Self.FK_grupo_profesor">
+      <End Role="profesor" EntitySet="profesor" />
+      <End Role="grupo" EntitySet="grupo" />
     </AssociationSet>
     <AssociationSet Name="FK_inscripcion_matricula" Association="Self.FK_inscripcion_matricula">
       <End Role="matricula" EntitySet="matricula" />
@@ -267,37 +299,5 @@
       <End Role="carrera" EntitySet="carrera" />
       <End Role="curso" EntitySet="curso" />
     </AssociationSet>
-    <AssociationSet Name="FK_grupo_estudiante" Association="cursosModel.FK_grupo_estudiante">
-      <End Role="estudiante" EntitySet="estudiante" />
-      <End Role="grupo" EntitySet="grupo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_grupo_profesor" Association="cursosModel.FK_grupo_profesor">
-      <End Role="profesor" EntitySet="profesor" />
-      <End Role="grupo" EntitySet="grupo" />
-    </AssociationSet>
   </EntityContainer>
-  <Association Name="FK_grupo_estudiante">
-    <End Type="cursosModel.estudiante" Role="estudiante" Multiplicity="0..1" />
-    <End Type="cursosModel.grupo" Role="grupo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="estudiante">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="grupo">
-        <PropertyRef Name="id_estudiante" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_grupo_profesor">
-    <End Type="cursosModel.profesor" Role="profesor" Multiplicity="0..1" />
-    <End Type="cursosModel.grupo" Role="grupo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="profesor">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="grupo">
-        <PropertyRef Name="id_profesor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

@@ -45,6 +45,7 @@ warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key
     <Property Name="nombre" Type="varchar" MaxLength="50" />
     <Property Name="apellido" Type="varchar" MaxLength="50" />
     <Property Name="ci" Type="varchar" MaxLength="50" />
+    <Property Name="id_grupo" Type="int" />
   </EntityType>
   <EntityType Name="grupo">
     <Key>
@@ -57,7 +58,6 @@ warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key
     <Property Name="id_aula" Type="int" />
     <Property Name="id_curso" Type="int" />
     <Property Name="id_profesor" Type="int" />
-    <Property Name="id_estudiante" Type="int" />
     <Property Name="nombre" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="inscripcion">
@@ -160,6 +160,18 @@ warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_estudiante_grupo">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="0..1" />
+    <End Role="estudiante" Type="Self.estudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="estudiante">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_grupo_aula">
     <End Role="aula" Type="Self.aula" Multiplicity="0..1" />
     <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
@@ -181,18 +193,6 @@ warning 6002: The table/view 'cursos.dbo.detalle_cc' does not have a primary key
       </Principal>
       <Dependent Role="grupo">
         <PropertyRef Name="id_curso" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_grupo_estudiante">
-    <End Role="estudiante" Type="Self.estudiante" Multiplicity="0..1" />
-    <End Role="grupo" Type="Self.grupo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="estudiante">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="grupo">
-        <PropertyRef Name="id_estudiante" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -287,16 +287,16 @@ FROM [dbo].[detalle_cc] AS [detalle_cc]</DefiningQuery>
       <End Role="curso" EntitySet="curso" />
       <End Role="detalle_cc" EntitySet="detalle_cc" />
     </AssociationSet>
+    <AssociationSet Name="FK_estudiante_grupo" Association="Self.FK_estudiante_grupo">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="estudiante" EntitySet="estudiante" />
+    </AssociationSet>
     <AssociationSet Name="FK_grupo_aula" Association="Self.FK_grupo_aula">
       <End Role="aula" EntitySet="aula" />
       <End Role="grupo" EntitySet="grupo" />
     </AssociationSet>
     <AssociationSet Name="FK_grupo_curso" Association="Self.FK_grupo_curso">
       <End Role="curso" EntitySet="curso" />
-      <End Role="grupo" EntitySet="grupo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_grupo_estudiante" Association="Self.FK_grupo_estudiante">
-      <End Role="estudiante" EntitySet="estudiante" />
       <End Role="grupo" EntitySet="grupo" />
     </AssociationSet>
     <AssociationSet Name="FK_grupo_profesor" Association="Self.FK_grupo_profesor">

@@ -19,8 +19,15 @@
     <th>
         @Html.DisplayNameFor(model => model.horario)
     </th>
-    
-         
+            <th>
+                @Html.DisplayNameFor(model => model.aula.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.curso.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.profesor.nombre)
+            </th>
     
   
     
@@ -37,7 +44,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.horario)
         </td>
-       
+        <td>
+            @Html.DisplayFor(modelItem => item.aula.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.curso.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profesor.nombre)
+        </td>
         
         
        

@@ -38,13 +38,13 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="apellido" ColumnName="apellido" />
           <ScalarProperty Name="ci" ColumnName="ci" />
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="grupo">
       <EntityTypeMapping TypeName="cursosModel.grupo">
         <MappingFragment StoreEntitySet="grupo">
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="horario" ColumnName="horario" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
@@ -52,7 +52,7 @@
           <ScalarProperty Name="id_aula" ColumnName="id_aula" />
           <ScalarProperty Name="id_curso" ColumnName="id_curso" />
           <ScalarProperty Name="id_profesor" ColumnName="id_profesor" />
-          <ScalarProperty Name="id_estudiante" ColumnName="id_estudiante" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

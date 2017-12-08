@@ -1,6 +1,6 @@
-﻿@model IMS_Project.Models.curso
+﻿@model IMS_Project.Models.grupo
 @{
-    ViewBag.Title = "Curso";
+    ViewBag.Title = "Grupo";
     ViewBag.SubTitle = "Delete";
 }
 
@@ -18,13 +18,33 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.creditos)
+                @Html.DisplayNameFor(model => model.horario)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.creditos)
+                @Html.DisplayFor(model => model.horario)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.aula.nombre)
+            </dt>
 
+            <dd>
+                @Html.DisplayFor(model => model.aula.nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.profesor.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.profesor.nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.curso.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.curso.nombre)
+            </dd>
             
 
 

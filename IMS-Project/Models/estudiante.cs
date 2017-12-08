@@ -17,15 +17,15 @@ namespace IMS_Project.Models
         public estudiante()
         {
             this.inscripcion = new HashSet<inscripcion>();
-            this.grupo = new HashSet<grupo>();
         }
     
         public int id { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string ci { get; set; }
+        public Nullable<int> id_grupo { get; set; }
     
+        public virtual grupo grupo { get; set; }
         public virtual ICollection<inscripcion> inscripcion { get; set; }
-        public virtual ICollection<grupo> grupo { get; set; }
     }
 }
