@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3567ef0f07134e5981f95904e361ed18" Name="Diagram1">
-        <EntityTypeShape EntityType="cursosModel.aula" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.carrera" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.curso" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.estudiante" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.grupo" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.inscripcion" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.matricula" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+      <Diagram DiagramId="c5cd76ed169146d19e13cf779e9bdd4b" Name="Diagram1">
+        <EntityTypeShape EntityType="cursosModel.aula" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.carrera" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.curso" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.estudiante" Width="1.5" PointX="9.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.grupo" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.inscripcion" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.matricula" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="cursosModel.nota" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.pago" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.profesor" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursosModel.tipocarrera" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.pago" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.profesor" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursosModel.tipocarrera" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <AssociationConnector Association="cursosModel.FK_grupo_aula" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.FK_carrera_tipocarrera" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.FK_matricula_carrera" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.FK_grupo_curso" ManuallyRouted="false" />
+        <AssociationConnector Association="cursosModel.FK_estudiante_grupo" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.FK_inscripcion_estudiante" ManuallyRouted="false" />
+        <AssociationConnector Association="cursosModel.FK_grupo_profesor" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.FK_inscripcion_matricula" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.FK_inscripcion_pago" ManuallyRouted="false" />
         <AssociationConnector Association="cursosModel.detalle_cc" ManuallyRouted="false" />
-        <AssociationConnector Association="cursosModel.FK_grupo_estudiante" />
-        <AssociationConnector Association="cursosModel.FK_grupo_profesor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

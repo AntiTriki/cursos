@@ -1,12 +1,12 @@
-﻿@model IEnumerable<IMS_Project.Models.curso>
+﻿@model IEnumerable<IMS_Project.Models.grupo>
 
 @{
-    ViewBag.Title = "Cursos";
+    ViewBag.Title = "Grupos";
 }
 
 <div >
    
-    <a href="@Url.Action("Create", "Product")" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>  
+    <a href="@Url.Action("Create", "Grupo")" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>  
 </div>
 <br /><br />
 <div id="product" class="table-responsive ">
@@ -17,10 +17,17 @@
     </th>
     
     <th>
-        @Html.DisplayNameFor(model => model.creditos)
+        @Html.DisplayNameFor(model => model.horario)
     </th>
-    
-         
+            <th>
+                @Html.DisplayNameFor(model => model.aula.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.curso.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.profesor.nombre)
+            </th>
     
   
     
@@ -35,9 +42,17 @@
         </td>
        
         <td>
-            @Html.DisplayFor(modelItem => item.creditos)
+            @Html.DisplayFor(modelItem => item.horario)
         </td>
-       
+        <td>
+            @Html.DisplayFor(modelItem => item.aula.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.curso.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profesor.nombre)
+        </td>
         
         
        

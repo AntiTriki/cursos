@@ -18,8 +18,14 @@ namespace IMS_Project.Controllers
         }
 
         public ActionResult Create()
-        {          
+        {
+            GetViewBagData();
             return View();
+        }
+        public void GetViewBagData()
+        {
+            
+            ViewBag.id_grupo = new SelectList(db.grupo, "id", "nombre");
         }
 
         [HttpPost]
@@ -31,6 +37,7 @@ namespace IMS_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Customer");
             }
+            GetViewBagData();
             return View();
         }
 
@@ -43,7 +50,7 @@ namespace IMS_Project.Controllers
             {
                 return HttpNotFound();
             }
-           
+            GetViewBagData();
             return View("Edit", cust);
         }
 
@@ -57,7 +64,7 @@ namespace IMS_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Customer");
             }
-
+            GetViewBagData();
             return View(cust);
         }
 

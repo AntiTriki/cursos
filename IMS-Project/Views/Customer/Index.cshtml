@@ -25,7 +25,9 @@
     <th>
         @Html.DisplayNameFor(model => model.ci)
     </th> 
-   
+      <th>
+          @Html.DisplayNameFor(model => model.grupo.nombre)
+      </th> 
    
     <th></th>
 </tr>
@@ -46,7 +48,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.ci)
         </td>        
-       
+        <td>
+            @Html.DisplayFor(modelItem => item.grupo.nombre)
+        </td>
+
        
     
         
