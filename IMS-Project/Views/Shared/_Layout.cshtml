@@ -162,6 +162,12 @@
                     <li class="@(ViewBag.Title == "Employee" ? "active" : "")">
                         <a href="@Url.Action("Index", "Employee")"><i class="fa fa-fw fa-user"></i>Profesor</a>
                     </li>
+                    <li class="@(ViewBag.Title == "Grupo" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Grupo")"><i class="fa fa-fw fa-user"></i>Grupos</a>
+                    </li>
+                    <li class="@(ViewBag.Title == "Aula" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Aula")"><i class="fa fa-fw fa-user"></i>Aula</a>
+                    </li>
                     @*<li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
@@ -211,7 +217,7 @@
                 <!-- /.row -->
                 <hr />
                 <footer>
-                    <p>&copy; @DateTime.Now.Year - Design &Aacute; Develop By Zulfiqar Akram</p>
+                    <p>&copy; @DateTime.Now.Year </p>
                 </footer>
             </div>
             <!-- /.container-fluid -->

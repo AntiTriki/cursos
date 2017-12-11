@@ -30,7 +30,11 @@ namespace IMS_Project.Controllers
             ViewBag.id_aula = new SelectList(db.aula, "id", "nombre");
             ViewBag.id_curso = new SelectList(db.curso, "id", "nombre");
         }
-
+        
+        public ActionResult GetHtmlPage()
+        {
+            return new FilePathResult("~/Views/Shared/report/index.html", "text/html");
+        }
         [HttpPost]
         public ActionResult Create(grupo prod)
         {

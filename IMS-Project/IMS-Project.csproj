@@ -130,6 +130,7 @@
     <Compile Include="Controllers\admin_LoginController.cs" />
     <Compile Include="Controllers\Image.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
+    <Compile Include="Controllers\AulaController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -315,6 +316,7 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\admin_Login\Index.cshtml" />
     <None Include="Views\Dashboard\blank-page.cshtml" />
+    <Content Include="Views\Shared\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -353,6 +355,10 @@
     <Content Include="Views\Grupo\Delete.cshtml" />
     <Content Include="Views\Grupo\Edit.cshtml" />
     <Content Include="Views\Grupo\Index.cshtml" />
+    <Content Include="Views\Aula\Create.cshtml" />
+    <Content Include="Views\Aula\Delete.cshtml" />
+    <Content Include="Views\Aula\Edit.cshtml" />
+    <Content Include="Views\Aula\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

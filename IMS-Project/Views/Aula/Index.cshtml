@@ -1,0 +1,68 @@
+﻿@model IEnumerable<IMS_Project.Models.aula>
+
+@{
+    ViewBag.Title = "Aula";
+}
+
+<div >
+   
+    <a href="@Url.Action("Create", "Aula")" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>  
+</div>
+<br /><br />
+<div id="product" class="table-responsive ">
+    <table class="table table-condensed table-hover table-bordered table-striped table">
+        <tr>
+    <th>
+        @Html.DisplayNameFor(model => model.nombre)
+    </th>
+    
+    <th>
+        @Html.DisplayNameFor(model => model.plazas)
+    </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nro_aula)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.ubicacion)
+            </th>
+
+  
+    
+    <th></th>
+</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.plazas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nro_aula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ubicacion)
+        </td>
+        
+        
+       
+        <td>
+            <a class="btn btn-sm btn-primary" href="@Url.Action("Edit", "Aula", new { id = item.id })" aria-label="Edit">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+            </a>
+           
+            <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Aula", new { id = item.id })" aria-label="Delete">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </a>
+        </td>
+    </tr>
+}
+    
+
+    </table>
+</div>

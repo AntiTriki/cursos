@@ -1,0 +1,316 @@
+{
+  "ReportVersion": "2017.2.4.0",
+  "ReportGuid": "cb330a562eafdf23e69f67e638d506e2",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(1512798587000+0000)/",
+  "ReportChanged": "/Date(1512798587000+0000)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "Styles": {
+    "0": {
+      "Ident": "StiStyle",
+      "Name": "Style1",
+      "Font": ";;Bold;",
+      "Border": ";;;;;;;solid:0,0,0",
+      "Brush": "solid:",
+      "TextBrush": "solid:0,0,0"
+    }
+  },
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "DataSources": {
+      "0": {
+        "Ident": "StiSqlSource",
+        "Name": "grupo",
+        "Alias": "grupo",
+        "Columns": {
+          "0": {
+            "Name": "curson",
+            "Index": -1,
+            "NameInSource": "curson",
+            "Alias": "curson",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "fecha_fin",
+            "Index": -1,
+            "NameInSource": "fecha_fin",
+            "Alias": "fecha_fin",
+            "Type": "System.DateTime"
+          },
+          "2": {
+            "Name": "fecha_inicio",
+            "Index": -1,
+            "NameInSource": "fecha_inicio",
+            "Alias": "fecha_inicio",
+            "Type": "System.DateTime"
+          },
+          "3": {
+            "Name": "grupon",
+            "Index": -1,
+            "NameInSource": "grupon",
+            "Alias": "grupon",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "horario",
+            "Index": -1,
+            "NameInSource": "horario",
+            "Alias": "horario",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "id",
+            "Index": -1,
+            "NameInSource": "id",
+            "Alias": "id",
+            "Type": "System.Int32"
+          },
+          "6": {
+            "Name": "id_aula",
+            "Index": -1,
+            "NameInSource": "id_aula",
+            "Alias": "id_aula",
+            "Type": "System.Int32"
+          },
+          "7": {
+            "Name": "id_curso",
+            "Index": -1,
+            "NameInSource": "id_curso",
+            "Alias": "id_curso",
+            "Type": "System.Int32"
+          },
+          "8": {
+            "Name": "id_profesor",
+            "Index": -1,
+            "NameInSource": "id_profesor",
+            "Alias": "id_profesor",
+            "Type": "System.Int32"
+          },
+          "9": {
+            "Name": "nombre",
+            "Index": -1,
+            "NameInSource": "nombre",
+            "Alias": "nombre",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "Connection",
+        "SqlCommand": "select g.nombre as grupon, c.nombre as curson from grupo g , curso c where g.id_curso =c.id"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiSqlDatabase",
+        "Name": "Connection",
+        "Alias": "Connection",
+        "ConnectionStringEncrypted": "+cjL60hZE/lrCClYbwAqP95g2S1PCntZRhv9vU0A6+eBbvkr3EyTyGIIpWxiVOQX2VSVoe9xw5nhSaEETlx3F99a/etGXIjNy0mc1Gp04UbjemXLTUrTeWpE/clpnPY=",
+        "PromptUserNameAndPassword": true
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "f32c91e3912bcdbae1d6babaa83144e1",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiPageHeaderBand",
+          "Name": "PageHeaderBand1",
+          "ClientRectangle": "0,0.4,19,2.8",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "13,0.2,6,0.6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Fecha : {Today.ToString(\"dddd, dd MMMM yyyy\")}"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.4,0.8,8.4,1.6",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "REPORTE CURSOS"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";24;;",
+              "Border": ";;;;;;;solid:0,0,0",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            }
+          }
+        },
+        "1": {
+          "Ident": "StiTable",
+          "Name": "Table1",
+          "ClientRectangle": "0,4,19,0.8",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiTableCell",
+              "Name": "Table1_Cell1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,9.5,0.8",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Curso"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";22;;",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 0
+            },
+            "1": {
+              "Ident": "StiTableCell",
+              "Name": "Table1_Cell2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.5,0,9.5,0.8",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Grupo"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";22;;",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 1
+            }
+          },
+          "RowCount": 1,
+          "ColumnCount": 2,
+          "NumberID": 2
+        },
+        "2": {
+          "Ident": "StiTable",
+          "Name": "Table2",
+          "ClientRectangle": "0,5.6,19,0.8",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiTableCell",
+              "Name": "Table2_Cell1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,9.5,0.8",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{grupo.curson}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";12;;",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression",
+              "ID": 0
+            },
+            "1": {
+              "Ident": "StiTableCell",
+              "Name": "Table2_Cell2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.5,0,9.5,0.8",
+              "Restrictions": "AllowMove, AllowSelect, AllowChange",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{grupo.grupon}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": ";12;;",
+              "Border": "All;105,105,105;;;;;;solid:105,105,105",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "DataColumn",
+              "ID": 1
+            }
+          },
+          "DataSourceName": "grupo",
+          "RowCount": 1,
+          "ColumnCount": 2,
+          "NumberID": 2
+        }
+      },
+      "PageWidth": 21.0,
+      "PageHeight": 29.7,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 1.0,
+        "Right": 1.0,
+        "Top": 1.0,
+        "Bottom": 1.0
+      }
+    }
+  }
+}
